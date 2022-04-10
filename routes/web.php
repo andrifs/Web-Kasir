@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\MasterBarangController;
+use App\Http\Controllers\TransaksiController;
 
 
 /*
@@ -18,20 +19,26 @@ use App\Http\Controllers\MasterBarangController;
 |
 */
 
+
 Route::group(['middleware' => ['guest']], function(){
     Route::get('/', [LoginController::class, 'index'])->name('login');
     Route::get('/login', [LoginController::class, 'index'])->name('login');
-    Route::post('/login', [LoginController::class, 'authenticate'])->name('login');;
+    Route::post('/login', [LoginController::class, 'authenticate'])->name('login');
 });
 
 Route::group(['middleware' => ['auth']], function(){
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
     Route::resource('dashboard', DashboardController::class);
+    Route::resource('transaksi', TransaksiController::class);
+
 });
 
 Route::group(['middleware' => ['auth', 'role:admin']], function(){
     Route::resource('user', UserController::class);
     Route::resource('master-barang', MasterBarangController::class);
+
+
+
 });
 
 Route::group(['middleware' => ['auth', 'role:kasir']], function(){

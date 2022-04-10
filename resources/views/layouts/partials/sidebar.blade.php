@@ -27,8 +27,8 @@
     </div>
 
     <!-- Nav Item - Transaksi Pembelian -->
-    <li class="nav-item">
-        <a class="nav-link" href="">
+    <li class="nav-item {{ Route::is('transaksi*') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('transaksi.index') }}">
             <i class="fas fa-cash-register"></i>
             <span>Transaksi Pembelian</span></a>
     </li>

@@ -44,17 +44,21 @@ class MasterBarangController extends Controller
     {
         $request->validate([
             'nama_barang' => 'required|unique:master_barangs,nama_barang',
-            'harga_satuan' => 'required|numeric'
+            'harga_satuan' => 'required|numeric',
+            'jumlah' => 'required|numeric'
         ],[
             'nama_barang.required' => 'Nama barang tidak boleh kosong',
             'nama_barang.unique' => 'Nama barang sudah tersedia',
             'harga_satuan.required' => 'Harga satuan tidak boleh kosong',
-            'harga_satuan.numeric' => 'Harga satuan harus berupa Angka'
+            'harga_satuan.numeric' => 'Harga satuan harus berupa Angka',
+            'jumlah.required' => 'Stok tidak boleh kosong',
+            'jumlah.numeric' => 'Stok harus berupa Angka'
         ]);
 
         $masterBarang = new MasterBarang;
         $masterBarang->nama_barang = $request->nama_barang;
         $masterBarang->harga_satuan = $request->harga_satuan;
+        $masterBarang->jumlah = $request->jumlah;
         $masterBarang->save();
 
         Alert::success('Berhasil!', 'Data barang berhasil ditambahkan')->autoClose(3000);
@@ -95,10 +99,13 @@ class MasterBarangController extends Controller
     {
         // dd($request->all());
         $request->validate([
-            'harga_satuan' => 'required|numeric'
+            'harga_satuan' => 'required|numeric',
+            'jumlah' => 'required|numeric'
         ],[
             'harga_satuan.required' => 'Harga satuan tidak boleh kosong',
-            'harga_satuan.numeric' => 'Harga satuan harus berupa Angka'
+            'harga_satuan.numeric' => 'Harga satuan harus berupa Angka',
+            'jumlah.required' => 'Stok tidak boleh kosong',
+            'jumlah.numeric' => 'Stok harus berupa Angka'
         ]);
 
         $masterBarang = MasterBarang::find($id);
@@ -114,6 +121,7 @@ class MasterBarangController extends Controller
 
         $masterBarang->nama_barang = $request->nama_barang;
         $masterBarang->harga_satuan = $request->harga_satuan;
+        $masterBarang->jumlah = $request->jumlah;
         $masterBarang->save();
 
         Alert::success('Berhasil!', 'Data barang berhasil di edit')->autoClose(3000);

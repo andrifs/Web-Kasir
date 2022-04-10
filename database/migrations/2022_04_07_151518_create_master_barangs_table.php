@@ -17,6 +17,7 @@ class CreateMasterBarangsTable extends Migration
             $table->id();
             $table->string('nama_barang');
             $table->integer('harga_satuan');
+            $table->integer('jumlah');
             $table->timestamps();
         });
     }

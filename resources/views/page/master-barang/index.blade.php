@@ -21,8 +21,9 @@
                     <thead>
                         <tr>
                             <th class="text-center" style="width: 5%">No</th>
-                            <th class="text-center" style="width: 35%">Nama Barang</th>
-                            <th class="text-center" style="width: 20%">Harga Sastuan</th>
+                            <th class="text-center" style="width: 30%">Nama Barang</th>
+                            <th class="text-center" style="width: 15%">Harga Sastuan</th>
+                            <th class="text-center" style="width: 10%">Stok</th>
                             <th class="text-center" style="width: 15%">Tanggal Dibuat</th>
                             <th class="text-center" style="width: 25%">Action</th>
                         </tr>
@@ -33,6 +34,7 @@
                             <td class="text-center">{{ $masterBarang->firstItem() + $key }}</td>
                             <td>{{ $data->nama_barang }}</td>
                             <td class="text-right">Rp. {{number_format($data->harga_satuan,0,',','.')  }}</td>
+                            <td class="text-center">{{ $data->jumlah }} pcs</td>
                             <td>{{ Carbon\Carbon::parse($data->created_at)->translatedFormat('l, d F Y H:i') }}</td>
                             <td class="text-center">
                                 <div class="form-inline justify-content-center">
@@ -113,6 +115,15 @@
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
+                        <div class="form-group">
+                            <label for="jumlah">Stok</label>
+                            <input type="number" name="jumlah"
+                                class="form-control @error('jumlah') is-invalid @enderror" id="jumlah"
+                                value="{{ old('jumlah') }}">
+                            @error('jumlah')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
                     </div>
                     <!-- /.card-body -->
                 </div>
@@ -157,6 +168,15 @@
                                 class="form-control @error('harga_satuan') is-invalid @enderror" id="harga_satuan"
                                 value="{{ old('harga_satuan', $dta->harga_satuan) }}">
                             @error('harga_satuan')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="jumlah">Stok</label>
+                            <input type="number" name="jumlah"
+                                class="form-control @error('jumlah') is-invalid @enderror" id="jumlah"
+                                value="{{ old('jumlah', $dta->jumlah) }}">
+                            @error('jumlah')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
