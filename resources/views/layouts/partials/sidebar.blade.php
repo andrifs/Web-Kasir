@@ -34,8 +34,8 @@
     </li>
 
     <!-- Nav Item - Daftar Transaksi -->
-    <li class="nav-item">
-        <a class="nav-link" href="">
+    <li class="nav-item {{ Route::is('daftar-transaksi*') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('daftar-transaksi.index') }}">
             <i class="fas fa-clipboard-list"></i>
             <span>Daftar Transaksi</span></a>
     </li>

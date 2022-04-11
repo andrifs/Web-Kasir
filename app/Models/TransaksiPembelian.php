@@ -10,4 +10,10 @@ class TransaksiPembelian extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
+
+    public function transaksiPembelianBarang()
+    {
+        # code...
+        return $this->hasMany('transaksi_pembelian_barangs');
+    }
 }

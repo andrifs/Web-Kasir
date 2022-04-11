@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DaftarTransaksiController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoginController;
@@ -32,6 +33,7 @@ Route::group(['middleware' => ['auth']], function(){
 Route::group(['middleware' => ['auth', 'role:admin']], function(){
     Route::resource('user', UserController::class);
     Route::resource('master-barang', MasterBarangController::class);
+    Route::resource('daftar-transaksi', DaftarTransaksiController::class);
 });
 
 Route::group(['middleware' => ['auth', 'role:kasir']], function(){
