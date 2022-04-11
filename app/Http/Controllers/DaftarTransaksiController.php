@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
+use Illuminate\Http\Request;
 use App\Models\TransaksiPembelian;
 use App\Models\TransaksiPembelianBarang;
-use Illuminate\Http\Request;
 
 class DaftarTransaksiController extends Controller
 {
@@ -16,11 +17,15 @@ class DaftarTransaksiController extends Controller
     public function index()
     {
         //
-        $daftarTransaksi = TransaksiPembelian::latest()->get();
+        $daftarTransaksi = "";
+        if (auth()->user()->role == "kasir") {
+            # code...
+            $daftarTransaksi = TransaksiPembelian::whereDate('created_at', Carbon::today())->latest()->get();
+        }else{
+            $daftarTransaksi = TransaksiPembelian::latest()->get();
+        }
 
         return view('page.daftar-transaksi.index', compact('daftarTransaksi'));
-
-        // return view('page.daftar-transaksi.index');
     }
 
     /**
