@@ -31,7 +31,7 @@
                     <tbody>
                         @forelse ($masterBarang as $key => $data )
                         <tr>
-                            <td class="text-center">{{ $masterBarang->firstItem() + $key }}</td>
+                            <td class="text-center">{{ $key + 1 }}</td>
                             <td>{{ $data->nama_barang }}</td>
                             <td class="text-right">Rp. {{number_format($data->harga_satuan,0,',','.')  }}</td>
                             <td class="text-center">{{ $data->jumlah }} pcs</td>
@@ -58,24 +58,7 @@
                         @endforelse
                     </tbody>
                 </table>
-                <div class="pull-left">
-                    Showing
-                    {{ $masterBarang->firstItem() }}
-                    To
-                    {{ $masterBarang->lastItem() }}
-                    of
-                    {{ $masterBarang->total() }}
-                    {{-- TOTAL tidak bisa digunakan ketika pake simplePaginate--}}
-                    entries
-                </div>
-                <div class="col float-right">
-                    <div class="pagination-block float-right">
-                        {{-- hapus class pagination-block, jika menggunakan simplePaginate --}}
-                        {{-- hapus isi didalam kurung links, jika menggunakan simplePaginate --}}
 
-                        {{ $masterBarang->links('layouts.paginate.paginationlinks') }}
-                    </div>
-                </div>
             </div>
         </div>
     </div>

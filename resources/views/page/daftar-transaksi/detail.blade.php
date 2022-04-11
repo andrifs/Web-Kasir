@@ -4,6 +4,7 @@
 
 @section('content')
 
+<a href="{{ route('daftar-transaksi.index') }}" class="btn btn-primary mb-3">Kembali</a>
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary" >Tabel Data Transaksi</h6>

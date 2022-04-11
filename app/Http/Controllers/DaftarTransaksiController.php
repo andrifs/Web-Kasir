@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\TransaksiPembelian;
 use App\Models\TransaksiPembelianBarang;
+use PDF;
 
 class DaftarTransaksiController extends Controller
 {
@@ -100,7 +101,19 @@ class DaftarTransaksiController extends Controller
     public function print($id)
     {
         # code...
-        $data = TransaksiPembelianBarang::where('transaksi_pembelian_id', $id)->get();
-        return $data;
+        $dataTransaksi = TransaksiPembelianBarang::where('transaksi_pembelian_id', $id)->get();
+        $totalHarga = TransaksiPembelian::find($id);
+        $data = [
+            'title' => 'Data Transaksi Kasir SIPD JABAR',
+            'date' => date('m/d/Y'),
+            'dataTransaksi' => $dataTransaksi,
+            'totalHarga' => $totalHarga
+        ];
+
+        // dd($data);
+        $pdf = PDF::loadView('page.daftar-transaksi.print', $data);
+        return $pdf->stream();
     }
+
+
 }

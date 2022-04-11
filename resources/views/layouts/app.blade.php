@@ -15,11 +15,6 @@
     <!-- Custom fonts for this template-->
     <link href="{{ asset('assets/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
 
-    {{-- DataTable --}}
-    {{-- <link href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" rel="stylesheet">
-    <link href="https://cdn.datatables.net/datetime/1.1.2/css/dataTables.dateTime.min.css" rel="stylesheet">
-    <link href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css" rel="stylesheet"> --}}
-
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
@@ -90,6 +85,12 @@
 
     {{-- SweetAlert --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
+
+    <script src=" {{ asset('assets/vendor/datatables/jquery.dataTables.min.js') }} "></script>
+    <script src="{{ asset('assets/vendor/datatables/dataTables.bootstrap4.min.js') }} "></script>
+
+    <!-- Page level custom scripts -->
+    <script src="{{ asset('assets/js/demo/datatables-demo.js') }} "></script>
 
     {{-- SweetAlert Delete Confirmation --}}
     <script type="text/javascript">

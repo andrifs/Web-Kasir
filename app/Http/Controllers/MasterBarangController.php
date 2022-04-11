@@ -22,7 +22,7 @@ class MasterBarangController extends Controller
         //jika menggunakan table biasa
         //$masterBarang = MasterBarang::latest()->paginate(5);
 
-        return view('page.master-barang.index_datatable', compact('masterBarang'));
+        return view('page.master-barang.index', compact('masterBarang'));
     }
 
     /**

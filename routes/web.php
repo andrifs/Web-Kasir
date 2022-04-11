@@ -32,18 +32,14 @@ Route::group(['middleware' => ['auth']], function(){
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
     Route::resource('dashboard', DashboardController::class);
 
-
+    Route::resource('transaksi', TransaksiController::class);
+    Route::resource('daftar-transaksi', DaftarTransaksiController::class);
+    Route::get('cetak/{id}', [DaftarTransaksiController::class, 'print'])->name('cetak');
 });
 
 Route::group(['middleware' => ['auth', 'role:admin']], function(){
     Route::resource('user', UserController::class);
     Route::resource('master-barang', MasterBarangController::class);
-});
-
-Route::group(['middleware' => ['auth', 'role:kasir, admin']], function(){
-    Route::resource('transaksi', TransaksiController::class);
-    Route::resource('daftar-transaksi', DaftarTransaksiController::class);
-    Route::get('daftar-transaksi/print/{id}', [DaftarTransaksiController::class, 'print']);
 });
 
 Route::get('/error', function () {

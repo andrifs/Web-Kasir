@@ -60,7 +60,7 @@
                         {{ session('error') }}
                     @endif
                 </p>
-                <p class="text-danger font-weight-bold">
+                <p class="text-success font-weight-bold">
                     @if (session()->has('success'))
                         {{ session('success') }}
                     @endif
@@ -101,7 +101,7 @@
         </div>
         <div class="card">
             <div class="card-body">
-                <button class="btn btn-warning btn-block">Cetak Transaksi</button>
+                {{-- <button class="btn btn-warning btn-block">Cetak Transaksi</button> --}}
                 <form wire:submit.prevent="handleSubmit">
                     <div>
                         <button wire:ignore type="submit" id="saveButton" class="btn btn-success btn-block mt-2">Simpan Transaksi</button>
