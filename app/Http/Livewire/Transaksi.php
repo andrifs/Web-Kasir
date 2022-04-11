@@ -27,7 +27,7 @@ class Transaksi extends Component
 
     public function render()
     {
-        $barang = BarangModel::where('nama_barang', 'like', '%'.$this->search.'%')->orderBy('created_at', 'DESC')->paginate(4);
+        $barang = BarangModel::where('nama_barang', 'like', '%'.$this->search.'%')->orderBy('created_at', 'DESC')->paginate(12);
 
         $condition = new \Darryldecode\Cart\CartCondition([
             'name' => 'pajak',
@@ -187,22 +187,17 @@ class Transaksi extends Component
                     $barang->decrement('jumlah', $cart['quantity']);
                 }
 
-
-
                $transaksiId = TransaksiPembelian::create([
                     'user_id' => Auth()->id(),
                     'total_harga' => $cartTotal
                 ]);
-
-
 
                 // dd($transaksiId->id);
                 foreach ($filterCart as $cart) {
                     TransaksiPembelianBarang::create([
                         'master_barang_id' => $cart['id'],
                         'transaksi_pembelian_id' => $transaksiId->id,
-                        'jumlah' => $cart['quantity'],
-                        'harga_satuan' => "600",
+                        'jumlah' => $cart['quantity']
                     ]);
                 }
 

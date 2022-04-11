@@ -9,29 +9,37 @@
             <h6 class="m-0 font-weight-bold text-primary" >Tabel Data Transaksi</h6>
         </div>
         <div class="card-body">
-            <div class="table-responsive">             
+            <div class="table-responsive">
                 <table id="dataTable" class="table table-bordered" style="width:100%">
                     <thead>
                         <tr>
-                            <th>No</th>
-                            <th>Nama Barang</th>
-                            <th>Harga Satuan</th>
-                            <th>Jumlah</th>
-                            <th>Waktu Pembelian</th>
-                            
+                            <th class="text-center">No</th>
+                            <th class="text-center">Waktu Pembelian</th>
+                            <th class="text-center">Nama Barang</th>
+                            <th class="text-center">Jumlah</th>
+                            <th class="text-center">Harga Satuan</th>
+                            <th class="text-center">Total</th>
+
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($daftarTransaksi as $key => $data )
                             <tr>
-                                <td>{{ $key + 1 }}</td>
-                                <td>{{ $data->masterBarang->nama_barang }}</td>
-                                <td class="text-right">Rp.  {{number_format($data->harga_satuan,0,',','.')  }}</td>
-                                <td>{{ $data->jumlah }}</td>
+                                <td class="text-center">{{ $key + 1 }}</td>
                                 <td>{{ Carbon\Carbon::parse($data->created_at)->translatedFormat('l, d F Y H:i') }}</td>
+                                <td>{{ $data->masterBarang->nama_barang }}</td>
+                                <td class="text-center">{{ $data->jumlah }}</td>
+                                <td class="text-right">Rp  {{number_format($data->masterBarang->harga_satuan,0,',','.')  }}</td>
+                                <td class="text-right">Rp {{ number_format($data->jumlah * $data->masterBarang->harga_satuan,0,',','.') }} </td>
                             </tr>
                         @endforeach
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <td class="text-center font-weight-bold" colspan="5"> Total Transaksi</td>
+                            <td class="text-right font-weight-bold">Rp {{ number_format($totalHarga->total_harga,0,',','.') }}</td>
+                        </tr>
+                    </tfoot>
                 </table>
             </div>
         </div>
@@ -46,7 +54,7 @@
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
-                    </div>                    
+                    </div>
                         <div class="modal-body">
                             @csrf
                             @method('PUT')
@@ -79,7 +87,7 @@
     <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.print.min.js"></script> --}}
 
-    
+
     <script src=" {{ asset('assets/vendor/datatables/jquery.dataTables.min.js') }} "></script>
     <script src="{{ asset('assets/vendor/datatables/dataTables.bootstrap4.min.js') }} "></script>
 

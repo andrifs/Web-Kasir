@@ -17,7 +17,7 @@ class DaftarTransaksiController extends Controller
     {
         //
         $daftarTransaksi = TransaksiPembelian::latest()->get();
-        
+
         return view('page.daftar-transaksi.index', compact('daftarTransaksi'));
 
         // return view('page.daftar-transaksi.index');
@@ -53,8 +53,9 @@ class DaftarTransaksiController extends Controller
     public function show($id)
     {
         //
+        $totalHarga = TransaksiPembelian::find($id);
         $daftarTransaksi = TransaksiPembelianBarang::where('transaksi_pembelian_id', $id)->get();
-        return view('page.daftar-transaksi.detail', compact('daftarTransaksi'));
+        return view('page.daftar-transaksi.detail', compact('daftarTransaksi', 'totalHarga'));
     }
 
     /**

@@ -16,7 +16,6 @@ class CreateTransaksiPembelianBarangsTable extends Migration
         Schema::create('transaksi_pembelian_barangs', function (Blueprint $table) {
             $table->id();
             $table->integer('jumlah');
-            $table->integer('harga_satuan');
 
             $table->unsignedBigInteger('master_barang_id');
             $table->foreign('master_barang_id')->references('id')->on('master_barangs');
