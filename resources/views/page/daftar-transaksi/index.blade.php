@@ -28,6 +28,7 @@
                                 <td class="text-center">
                                     <div class="form-inline justify-content-center">
                                         <a href="{{ route('daftar-transaksi.show', $data->id) }}" class="btn btn-primary btn-sm mr-1">Detail</a>
+                                        <a href="{{ url('daftar-transaksi/print', $data->id) }}" class="btn btn-info btn-sm mr-1">Cetak</a>
                                     </div>
                                 </td>
                             </tr>

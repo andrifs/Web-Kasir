@@ -90,4 +90,11 @@ class DaftarTransaksiController extends Controller
     {
         //
     }
+
+    public function print($id)
+    {
+        # code...
+        $data = TransaksiPembelianBarang::where('transaksi_pembelian_id', $id)->get();
+        return $data;
+    }
 }

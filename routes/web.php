@@ -6,7 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\MasterBarangController;
-
+use App\Http\Livewire\DaftarTransaksi;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +34,7 @@ Route::group(['middleware' => ['auth', 'role:admin']], function(){
     Route::resource('user', UserController::class);
     Route::resource('master-barang', MasterBarangController::class);
     Route::resource('daftar-transaksi', DaftarTransaksiController::class);
+    Route::get('daftar-transaksi/print/{id}', [DaftarTransaksiController::class, 'print']);
 });
 
 Route::group(['middleware' => ['auth', 'role:kasir']], function(){
