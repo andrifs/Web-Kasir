@@ -26,19 +26,21 @@
         Menu
     </div>
 
-    <!-- Nav Item - Transaksi Pembelian -->
-    <li class="nav-item {{ Route::is('transaksi*') ? 'active' : '' }}">
-        <a class="nav-link" href="{{ route('transaksi.index') }}">
-            <i class="fas fa-cash-register"></i>
-            <span>Transaksi Pembelian</span></a>
-    </li>
+    @if (auth()->user()->role == "admin" || auth()->user()->role == "kasir")
+        <!-- Nav Item - Transaksi Pembelian -->
+        <li class="nav-item {{ Route::is('transaksi*') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('transaksi.index') }}">
+                <i class="fas fa-cash-register"></i>
+                <span>Transaksi Pembelian</span></a>
+        </li>
 
-    <!-- Nav Item - Daftar Transaksi -->
-    <li class="nav-item {{ Route::is('daftar-transaksi*') ? 'active' : '' }}">
-        <a class="nav-link" href="{{ route('daftar-transaksi.index') }}">
-            <i class="fas fa-clipboard-list"></i>
-            <span>Daftar Transaksi</span></a>
-    </li>
+        <!-- Nav Item - Daftar Transaksi -->
+        <li class="nav-item {{ Route::is('daftar-transaksi*') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('daftar-transaksi.index') }}">
+                <i class="fas fa-clipboard-list"></i>
+                <span>Daftar Transaksi</span></a>
+        </li>
+    @endif
 
     @if (auth()->user()->role == "admin")
         <!-- Divider -->

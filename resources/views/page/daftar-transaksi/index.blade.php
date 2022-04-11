@@ -9,7 +9,7 @@
             <h6 class="m-0 font-weight-bold text-primary" >Tabel Data Transaksi</h6>
         </div>
         <div class="card-body">
-            <div class="table-responsive">             
+            <div class="table-responsive">
                 <table id="dataTable" class="table table-bordered" style="width:100%">
                     <thead>
                         <tr>
@@ -48,7 +48,7 @@
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
-                    </div>                    
+                    </div>
                         <div class="modal-body">
                             @csrf
                             @method('PUT')
@@ -81,7 +81,7 @@
     <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.print.min.js"></script> --}}
 
-    
+
     <script src=" {{ asset('assets/vendor/datatables/jquery.dataTables.min.js') }} "></script>
     <script src="{{ asset('assets/vendor/datatables/dataTables.bootstrap4.min.js') }} "></script>
 

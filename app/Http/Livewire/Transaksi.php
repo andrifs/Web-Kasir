@@ -70,8 +70,6 @@ class Transaksi extends Component
             'total' => $total
         ];
 
-
-
         return view('livewire.transaksi', [
             'barang' => $barang,
             'carts' => $cartData,
