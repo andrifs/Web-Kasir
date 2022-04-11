@@ -10,4 +10,8 @@ class MasterBarang extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
+
+    public function transaksiPembelianBarang(){
+        return $this->hasMany(TransaksiPembelianBarang::class);
+    }
 }

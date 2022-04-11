@@ -2,9 +2,16 @@
     <div class="col-md-8">
         <div class="card">
             <div class="card-body">
-                <h2 class="font-weight-bold">Data Barang</h2>
+                <div class="row pb-2">
+                    <div class="col-md-6">
+                        <h2 class="font-weight-bold">Data Barang</h2>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" wire:model="search" class="form-control" placeholder="Cari barang . . .">
+                    </div>
+                </div>
                 <div class="row">
-                    @foreach ($barang as $data )
+                    @forelse ($barang as $data )
                         <div class="col-md-3 mb-3">
                             <div class="card">
                                 <div class="card-body">
@@ -12,12 +19,34 @@
                                 </div>
                                 <div class="card-footer">
                                     <h6 class="text-center font-weight-bold">{{ $data->nama_barang }}</h6>
-                                    <p class="text-center">Rp {{ $data->harga_satuan }}</p>
+                                    <p class="text-center">Rp {{ number_format($data->harga_satuan,0,',','.') }}</p>
                                     <button wire:click="addItem({{ $data->id }})" class="btn btn-primary btn-sm btn-block">Tambah Transaksi</button>
                                 </div>
                             </div>
                         </div>
-                    @endforeach
+                    @empty
+                    <div class="col-sm-12 mt-4">
+                        <h4 class="text-center font-weight-bold text-danger">Barang tidak ditemukan!</h4>
+                    </div>
+                    @endforelse
+                </div>
+                <div class="pull-left pt-4">
+                    Showing
+                    {{ $barang->firstItem() }}
+                    To
+                    {{ $barang->lastItem() }}
+                    of
+                    {{ $barang->total() }}
+                    {{-- TOTAL tidak bisa digunakan ketika pake simplePaginate--}}
+                    entries
+                </div>
+                <div class="col float-right">
+                    <div class="pagination-block float-right">
+                        {{-- hapus class pagination-block, jika menggunakan simplePaginate --}}
+                        {{-- hapus isi didalam kurung links, jika menggunakan simplePaginate --}}
+
+                        {{ $barang->links() }}
+                    </div>
                 </div>
             </div>
         </div>
@@ -26,28 +55,45 @@
         <div class="card">
             <div class="card-body">
                 <h2 class="font-weight-bold">Transaksi</h2>
-                <table class="table table-sm table-bordered table-striped table-hovered">
-                    <thead>
+                <p class="text-danger font-weight-bold">
+                    @if (session()->has('error'))
+                        {{ session('error') }}
+                    @endif
+                </p>
+                <p class="text-danger font-weight-bold">
+                    @if (session()->has('success'))
+                        {{ session('success') }}
+                    @endif
+                </p>
+                <table class="table table-sm table-bordered table-hovered">
+                    <thead class="bg-secondary text-white">
                         <tr>
-                            <th>No</th>
-                            <th>Nama Barang</th>
-                            <th>Harga</th>
+                            <th class="text-center">No</th>
+                            <th class="text-center">Barang</th>
+                            <th class="text-center">Harga</th>
                         </tr>
                     </thead>
                     <tbody>
                         {{-- @dd($carts) --}}
                         @forelse ($carts as $index => $data )
                             <tr>
-                                <td>{{ $index + 1 }}</td>
-                                <td>{{ $data['nama_barang'] }} || {{ $data['jumlah'] }}</td>
-                                <td>{{ $data['harga_satuan'] }}</td>
+                                <td class="text-center">{{ $index + 1 }}</td>
+                                <td>
+                                    <a href="#" class="font-weight-bold text-dark">{{ $data['nama_barang'] }}</a>
+                                    <br>
+                                    Qty : {{ $data['jumlah'] }}
+                                    <a href="#" wire:click="increment('{{$data['rowId']}}')" class="font-weight-bold text-dark" style="font-size: 18px">+</a>
+                                    <a href="#" wire:click="decrement('{{$data['rowId']}}')" class="font-weight-bold text-dark" style="font-size: 18px">-</a>
+                                    <a href="#" wire:click="removeItem('{{$data['rowId']}}')" class="font-weight-bold text-danger" style="font-size: 13px">X</a>
+                                </td>
+                                <td class="text-right">Rp {{ number_format($data['harga_satuan'],0,',','.') }}</td>
                             </tr>
                         @empty
                             <td colspan="3"><h6 class="text-center">Transaksi Kosong</h6></td>
                         @endforelse
                         <tr>
                             <td colspan="2" class="text-center font-weight-bold">Total</td>
-                            <td class="font-weight-bold">{{ $summary['sub_total'] }}</td>
+                            <td class="font-weight-bold text-right">Rp {{ number_format($summary['sub_total'],0,',','.') }}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -55,11 +101,15 @@
         </div>
         <div class="card">
             <div class="card-body">
-                <div>
-                    <button class="btn btn-warning btn-block">Cetak Transaksi</button>
-                    <button class="btn btn-success btn-block">Simpan Transaksi</button>
-                </div>
+                <button class="btn btn-warning btn-block">Cetak Transaksi</button>
+                <form wire:submit.prevent="handleSubmit">
+                    <div>
+                        <button wire:ignore type="submit" id="saveButton" class="btn btn-success btn-block mt-2">Simpan Transaksi</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
 </div>
+
+
