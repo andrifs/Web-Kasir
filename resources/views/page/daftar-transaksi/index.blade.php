@@ -11,13 +11,12 @@
                 <h6 class="m-0 font-weight-bold text-primary" >Tabdel Data Transaksi</h6>
             </div>
             <div class="card-body">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <button class="btn btn-primary mb-4" data-toggle="modal" data-target="#modalCreate">Tambah Data Barang</button>
-                    </div>
-                    <div class="col-lg-6">
-                        <input type="text" id="min" name="min" wire:model.defer="date.min" wire:change="dateFilter()">
-                        <input type="text" id="max" name="max" wire:model-defer="date.max" wire:change="dateFilter()">
+                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                    <button class="btn btn-primary mb-4" data-toggle="modal" data-target="#modalCreate">Tambah Data Barang</button>
+                    
+                    <div class="d-sm-flex align-items-center justify-content-between">
+                        <input type="text" class="col-sm-6" id="min" name="min" wire:model.defer="date.min" wire:change="dateFilter()">
+                        <input type="text" class="col-sm-6" id="max" name="max" wire:model-defer="date.max" wire:change="dateFilter()">
                     </div>
                 </div>
                 <div class="table-responsive">             
