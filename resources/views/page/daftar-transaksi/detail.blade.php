@@ -25,7 +25,7 @@
                         @foreach ($daftarTransaksi as $key => $data )
                             <tr>
                                 <td>{{ $key + 1 }}</td>
-                                <td>{{ $data->master_barang->nama_barang }}</td>
+                                <td>{{ $data->masterBarang->nama_barang }}</td>
                                 <td class="text-right">Rp.  {{number_format($data->harga_satuan,0,',','.')  }}</td>
                                 <td>{{ $data->jumlah }}</td>
                                 <td>{{ Carbon\Carbon::parse($data->created_at)->translatedFormat('l, d F Y H:i') }}</td>
