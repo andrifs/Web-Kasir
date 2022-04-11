@@ -14,6 +14,6 @@ class TransaksiPembelian extends Model
     public function transaksiPembelianBarang()
     {
         # code...
-        return $this->hasMany('transaksi_pembelian_barangs');
+        return $this->hasMany(TransaksiPembelian::class);
     }
 }

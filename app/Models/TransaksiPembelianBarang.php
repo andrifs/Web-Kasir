@@ -20,6 +20,6 @@ class TransaksiPembelianBarang extends Model
     public function master_barang()
     {
         # code...
-        return $this->belongsTo('master_barangs', 'master_barang_id');
+        return $this->belongsTo(MasterBarang::class, 'master_barang_id');
     }
 }

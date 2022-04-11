@@ -14,22 +14,21 @@
                     <thead>
                         <tr>
                             <th>No</th>
+                            <th>Nama Barang</th>
+                            <th>Harga Satuan</th>
+                            <th>Jumlah</th>
                             <th>Waktu Pembelian</th>
-                            <th>Total Harga</th>
-                            <th class="text-center">Action</th>
+                            
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($daftarTransaksi as $key => $data )
                             <tr>
                                 <td>{{ $key + 1 }}</td>
+                                <td>{{ $data->master_barang->nama_barang }}</td>
+                                <td class="text-right">Rp.  {{number_format($data->harga_satuan,0,',','.')  }}</td>
+                                <td>{{ $data->jumlah }}</td>
                                 <td>{{ Carbon\Carbon::parse($data->created_at)->translatedFormat('l, d F Y H:i') }}</td>
-                                <td class="text-right">Rp.  {{number_format($data->total_harga,0,',','.')  }}</td>
-                                <td class="text-center">
-                                    <div class="form-inline justify-content-center">
-                                        <a href="{{ route('daftar-transaksi.show', $data->id) }}" class="btn btn-primary btn-sm mr-1">Detail</a>
-                                    </div>
-                                </td>
                             </tr>
                         @endforeach
                     </tbody>

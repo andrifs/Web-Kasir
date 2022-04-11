@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\TransaksiPembelian;
+use App\Models\TransaksiPembelianBarang;
 use Illuminate\Http\Request;
 
 class DaftarTransaksiController extends Controller
@@ -16,6 +17,7 @@ class DaftarTransaksiController extends Controller
     {
         //
         $daftarTransaksi = TransaksiPembelian::latest()->get();
+        
         return view('page.daftar-transaksi.index', compact('daftarTransaksi'));
 
         // return view('page.daftar-transaksi.index');
@@ -51,6 +53,8 @@ class DaftarTransaksiController extends Controller
     public function show($id)
     {
         //
+        $daftarTransaksi = TransaksiPembelianBarang::where('transaksi_pembelian_id', $id)->get();
+        return view('page.daftar-transaksi.detail', compact('daftarTransaksi'));
     }
 
     /**
