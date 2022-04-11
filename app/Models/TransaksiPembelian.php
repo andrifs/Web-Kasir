@@ -15,3 +15,4 @@ class TransaksiPembelian extends Model
         return $this->hasMany(TransaksiPembelianBarang::class);
     }
 }
+
