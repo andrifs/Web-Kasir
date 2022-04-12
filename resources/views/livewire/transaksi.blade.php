@@ -104,7 +104,11 @@
                 {{-- <button class="btn btn-warning btn-block">Cetak Transaksi</button> --}}
                 <form wire:submit.prevent="handleSubmit">
                     <div>
-                        <button wire:ignore type="submit" id="saveButton" class="btn btn-success btn-block mt-2">Simpan Transaksi</button>
+                        @if (count($carts) == 0)
+                            <button type="submit" id="saveButton" class="btn btn-success btn-block mt-2" disabled>Simpan Transaksi</button>
+                        @else
+                            <button type="submit" id="saveButton" class="btn btn-success btn-block mt-2">Simpan Transaksi</button>
+                        @endif
                     </div>
                 </form>
             </div>
